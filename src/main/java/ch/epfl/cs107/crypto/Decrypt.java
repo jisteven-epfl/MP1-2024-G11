@@ -52,31 +52,10 @@ public final class Decrypt {
         return Helper.fail("NOT IMPLEMENTED");
     }
 
-    // ============================================================================================
-    // =================================== CBC'S ENCRYPTION =======================================
-    // ============================================================================================
 
-    /**
-     * Method to decode cbc-encrypted ciphers
-     * @param cipher message to decode
-     * @param iv the pad of size BLOCKSIZE we use to start the chain encoding
-     * @return decoded message
-     */
-    public static byte[] cbc(byte[] cipher, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
-    }
-
-    // ============================================================================================
-    // =================================== XOR'S ENCRYPTION =======================================
-    // ============================================================================================
-
-    /**
-     * Method to decode xor-encrypted ciphers
-     * @param cipher text to decode
-     * @param key the byte we will use to XOR
-     * @return decoded message
-     */
     public static byte[] xor(byte[] cipher, byte key) {
+        assert cipher.length != 0;
+
         byte[] decryptedText = new byte[cipher.length];
         for (int i=0 ; i< cipher.length; i++) {
             decryptedText[i] = (byte)(cipher[i]^key);
@@ -84,18 +63,20 @@ public final class Decrypt {
         return decryptedText;
     }
 
-    // ============================================================================================
-    // =================================== ONETIME'S PAD ENCRYPTION ===============================
-    // ============================================================================================
 
-    /**
-     * Method to decode otp-encrypted ciphers
-     * @param cipher text to decode
-     * @param pad the one-time pad to use
-     * @return decoded message
-     */
     public static byte[] oneTimePad(byte[] cipher, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert cipher.length != 0;
+        assert pad.length >= cipher.length;
+
+        byte[] decryptedText = new byte[cipher.length];
+        for (int i=0 ; i< cipher.length; i++) {
+            decryptedText[i] = (byte)(cipher[i]^pad[i]);
+        }
+        return decryptedText;
     }
 
+
+    public static byte[] cbc(byte[] cipher, byte[] iv) {
+        return Helper.fail("NOT IMPLEMENTED");
+    }
 }

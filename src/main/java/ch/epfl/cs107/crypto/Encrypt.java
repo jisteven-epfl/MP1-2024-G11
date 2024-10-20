@@ -55,31 +55,10 @@ public final class Encrypt {
         return Helper.fail("NOT IMPLEMENTED");
     }
 
-    // ============================================================================================
-    // =================================== CBC'S ENCRYPTION =======================================
-    // ============================================================================================
 
-    /**
-     * Method applying a basic chain block counter of XOR without encryption method.
-     * @param plainText the byte array representing the string to encode
-     * @param iv the pad of size BLOCKSIZE we use to start the chain encoding
-     * @return an encoded byte array
-     */
-    public static byte[] cbc(byte[] plainText, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
-    }
-
-    // ============================================================================================
-    // =================================== XOR'S ENCRYPTION =======================================
-    // ============================================================================================
-
-    /**
-     * Method to encode a byte array using a XOR with a single byte long key
-     * @param plainText the byte array representing the string to encode
-     * @param key the byte we will use to XOR
-     * @return an encoded byte array
-     */
     public static byte[] xor(byte[] plainText, byte key) {
+        assert plainText.length != 0;
+
         byte[] encryptedText = new byte[plainText.length];
         for (int i=0 ; i< plainText.length; i++) {
             encryptedText[i] = (byte)(plainText[i]^key);
@@ -87,29 +66,37 @@ public final class Encrypt {
         return encryptedText;
     }
 
-    // ============================================================================================
-    // =================================== ONETIME'S PAD ENCRYPTION ===============================
-    // ============================================================================================
 
-    /**
-     * Method to encode a byte array using a one-time pad of the same length.
-     *  The method XOR them together.
-     * @param plainText the byte array representing the string to encode
-     * @param pad the one-time pad
-     * @return an encoded byte array
-     */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText.length != 0;
+        assert pad.length >= plainText.length;
+
+        byte[] encryptedText = new byte[plainText.length];
+        for (int i=0 ; i< plainText.length; i++) {
+            encryptedText[i] = (byte)(plainText[i]^pad[i]);
+        }
+        return encryptedText;
     }
 
-    /**
-     * Method to encode a byte array using a one-time pad
-     * @param plainText Plain text to encode
-     * @param pad Array containing the used pad after the execution
-     * @param result Array containing the result after the execution
-     */
+
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        Helper.fail("NOT IMPLEMENTED");
+        assert plainText.length != 0;
+        assert pad.length == plainText.length;
+        assert result.length == plainText.length;
+
+        // Aleatory generation of pad
+        for (int i = 0; i<plainText.length; i++) {
+            pad[i] = (byte)(int)(Math.random()*255);
+        }
+
+        // Encryption of plainText
+        for (int i=0 ; i< plainText.length; i++) {
+            result[i] = (byte)(plainText[i]^pad[i]);
+        }
+    }
+
+    public static byte[] cbc(byte[] plainText, byte[] iv) {
+        return Helper.fail("NOT IMPLEMENTED");
     }
 
 }

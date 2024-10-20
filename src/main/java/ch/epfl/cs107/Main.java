@@ -73,9 +73,9 @@ public final class Main {
         // ========== Test Cryptography Methods ==========
         String message = "La vie est un long fleuve tranquille :-)";
         String key = "2cF%5";
-        //testCrypto(message, key);
-        //message = Text.toString(Helper.read("text_one.txt"));
-        //testCrypto(message, key);
+        testCrypto(message, key);
+        message = Text.toString(Helper.read("text_one.txt"));
+        testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========
         //assert testEmbedBWImage();
@@ -294,11 +294,11 @@ public final class Main {
     private static void testCrypto(String message, String key) {
         byte[] byteMessage = Text.toBytes(message);
         byte[] byteKey = Text.toBytes(key);
-        assert testCaesar(byteMessage, byteKey[0]);
+        //assert testCaesar(byteMessage, byteKey[0]);
         assert testXor(byteMessage, byteKey[0]);
-        assert testVigenere(byteMessage, byteKey);
+        //assert testVigenere(byteMessage, byteKey);
         assert testOneTimePad(byteMessage);
-        assert testCBC(byteMessage, byteKey);
+        //assert testCBC(byteMessage, byteKey);
     }
 
     // ============================================================================================

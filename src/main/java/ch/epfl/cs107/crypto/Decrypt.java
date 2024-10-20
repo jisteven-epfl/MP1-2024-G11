@@ -77,7 +77,11 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] xor(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] decryptedText = new byte[cipher.length];
+        for (int i=0 ; i< cipher.length; i++) {
+            decryptedText[i] = (byte)(cipher[i]^key);
+        }
+        return decryptedText;
     }
 
     // ============================================================================================

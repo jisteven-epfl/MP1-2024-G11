@@ -80,7 +80,11 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] xor(byte[] plainText, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] encryptedText = new byte[plainText.length];
+        for (int i=0 ; i< plainText.length; i++) {
+            encryptedText[i] = (byte)(plainText[i]^key);
+        }
+        return encryptedText;
     }
 
     // ============================================================================================
